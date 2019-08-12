@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+		body { margin: 0; }
+		canvas { width: 100%; height: 100% }
+	</style>
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/107/three.min.js"></script>
+    <script src="orbit.js"></script>
+    <script>
+
+        var scene = new THREE.Scene();
+
+        // Grid
+        //
+        var size = 10;
+        var divisions = 10;
+        var gridHelper = new THREE.GridHelper( size, divisions, 'red', 'green' );
+        gridHelper.position.set( 0, -1, 0 );
+        scene.add( gridHelper );
+
+        // Lines
+        //
+        var material_lines = new THREE.LineBasicMaterial( { color: '#0000ff' } );
+        var geometry = new THREE.Geometry();
+        geometry.vertices.push(new THREE.Vector3( -2, -1, 0) );
+        geometry.vertices.push(new THREE.Vector3( 0, 2, 0) );
+        geometry.vertices.push(new THREE.Vector3( 2, -1, 0) );
+        geometry.vertices.push(new THREE.Vector3( -2, -1, 0) );
+        var line = new THREE.Line( geometry, material );
+        scene.add( line );
+
+        // Arrows
+        //
+        var dir = new THREE.Vector3( 0, 2, 0 );
+        dir.normalize(); //normalize the direction vector (convert to vector of length 1)
+        var origin = new THREE.Vector3( 0, 0, 0 );
+        var length = 1;
+        var hex = 'red';
+        var arrowHelper = new THREE.ArrowHelper( dir, origin, length, hex );
+        scene.add( arrowHelper );
+
+        // Hemisphere
+        //
+
+        // Box
+        //
+        var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+        var material = new THREE.MeshStandardMaterial( {
+            color: '#00ff00'
+        } );
+        var cube = new THREE.Mesh( geometry, material );
+        scene.add( cube );
+
+        // Torus
+        //
+        // var geometry = new THREE.TorusGeometry( 1, 0.1, 4, 3 );
+        // var material = new THREE.MeshStandardMaterial( {
+        //     color: '#00ff00',
+        // } );
+        // var torus = new THREE.Mesh( geometry, material );
+        // torus.rotation.set( 0, 0, Math.PI / 2 );
+        // scene.add( torus );
+
+        // Renderer
+        //
+        var renderer = new THREE.WebGLRenderer();
+        renderer.setSize( window.innerWidth, window.innerHeight );
+        document.body.appendChild( renderer.domElement );
+
+        // Light
+        //
+        var light = new THREE.DirectionalLight( 0xdddddd, 0.8 );
+        light.position.set( -80, 80, 80 );
+        scene.add( light );
+
+        // camera
+        //
+        var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+        var controls = new THREE.OrbitControls( camera, renderer.domElement );
+        camera.position.set( 0, 0, 5 );
+        controls.update();
+
+
+        // camera.position.z = 5;
+
+        function animate() {
+        	requestAnimationFrame( animate );
+            // cube.rotation.x += 0.025;
+            cube.rotation.y += 0.0125;
+            controls.update();
+        	renderer.render( scene, camera );
+        }
+        animate();
+
+	</script>
+</body>
+</html>

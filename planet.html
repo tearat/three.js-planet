@@ -5,11 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/style.css">
-    <title>Planer demo</title>
+    <title>Planet demo</title>
 </head>
 <body>
-    <div id="info">
-        <p class="title">Название города</p>
+
+    <canvas id="three"></canvas>
+
+    <!-- <div id="ui">
+
+        <div class="input-block">
+			<input type="radio" id="mode_select" name="mode" value="select" class="radio" checked />
+			<label for="mode_select"><span></span>Select</label>
+		</div>
+
+        <div class="input-block">
+			<input type="radio" id="mode_move" name="mode" value="move" class="radio" />
+			<label for="mode_move"><span></span>Move</label>
+		</div>
+
+        <div class="input-block">
+			<input type="radio" id="mode_create" name="mode" value="create" class="radio" />
+			<label for="mode_create"><span></span>Create</label>
+		</div>
+
+        <div class="input-block">
+			<input type="radio" id="mode_delete" name="mode" value="delete" class="radio" />
+			<label for="mode_delete"><span></span>Delete</label>
+		</div>
+
+    </div> -->
+
+    <div id="new-geo-modal">
+        <div class="form">
+            <label for="new-geo-input">New place:</label>
+            <input type="text" id="new-geo-input">
+            <button id="new-geo-submit">Done</button>
+            <button id="new-geo-cancel">Cancel</button>
+        </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/107/three.min.js"></script>
